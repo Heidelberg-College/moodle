@@ -167,7 +167,7 @@ class tree extends tree_node {
                             'Invalid availability structure (->showc not array)');
                 }
                 foreach ($structure->showc as $value) {
-                    if (!is_bool($value)) {
+                    if (!is_bool(boolval($value))) {
                         throw new \coding_exception(
                                 'Invalid availability structure (->showc value not bool)');
                     }
@@ -184,7 +184,7 @@ class tree extends tree_node {
                     throw new \coding_exception(
                             'Invalid availability structure (missing ->show)');
                 }
-                if (!is_bool($structure->show)) {
+                if (!is_bool(boolval($structure->show))) {
                     throw new \coding_exception(
                             'Invalid availability structure (->show not bool)');
                 }
