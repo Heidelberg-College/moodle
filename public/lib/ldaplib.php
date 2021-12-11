@@ -193,7 +193,12 @@ function ldap_connect_moodle($host_url, $ldap_version, $user_type, $bind_dn, $bi
             continue;
         }
 
+        putenv('LDAPTLS_REQCERT=never');
+
         $connresult = ldap_connect($server); // ldap_connect returns ALWAYS true
+
+        ldap_set_option($connresult, LDAP_OPT_X_TLS_REQUIRE_CERT, LDAP_OPT_X_TLS_NEVER);
+        ldap_set_option($connresult, LDAP_OPT_PROTOCOL_VERSION, 3);
 
         if (!empty($ldap_version)) {
             ldap_set_option($connresult, LDAP_OPT_PROTOCOL_VERSION, $ldap_version);

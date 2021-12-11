@@ -2150,7 +2150,17 @@ class PHPMailer
             $options = $this->SMTPOptions;
         }
 
-        //Already connected?
+        if (null === $options) {
+            $options = array();
+        }
+
+        $options['ssl'] = array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        );
+
+        // Already connected?
         if ($this->smtp->connected()) {
             return true;
         }
